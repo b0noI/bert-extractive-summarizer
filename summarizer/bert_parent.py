@@ -36,7 +36,7 @@ class BertParent(object):
         :param custom_tokenizer: Place to use custom tokenizer
         """
 
-        base_model, base_tokenizer = self.MODELS.get('en-core-web-lg', (None, None))
+        base_model, base_tokenizer = self.MODELS.get('bert-large-uncased', (None, None))
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         if custom_model:
