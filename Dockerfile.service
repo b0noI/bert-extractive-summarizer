@@ -12,7 +12,8 @@ RUN apt-get update && \
     libxrender-dev \
     libxext6 \
     libsm6 \
-    openssl
+    openssl \
+    git
 
 RUN mkdir -p /opt/service
 COPY requirements-service.txt /opt/service
