@@ -1,14 +1,14 @@
 numpy==1.16.3
 torch==1.0.1
-spacy==2.1.3
+spacy==2.2.*
 transformers==2.2.2
 Cython==0.29.10
 tqdm==4.32.2
 neuralcoref==4.0
 argparse
 scikit-learn
-bert-extractive-summarizer==0.4.2
+git+https://github.com/b0noI/bert-extractive-summarizer.git
 Flask
 flask-cors
 nltk
-https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.1.0/en_core_web_sm-2.1.0.tar.gz
+https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-2.2.5/en_core_web_lg-2.2.5.tar.gz
