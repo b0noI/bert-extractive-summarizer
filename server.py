@@ -15,8 +15,8 @@ CORS(app)
 
 class Parser(object):
 
-    def __init__(self, raw_text: bytes):
-        self.all_data = str(raw_text, 'utf-8').split('\n')
+    def __init__(self, text):
+        self.all_data = text.split('\n')
 
     def __isint(self, v) -> bool:
         try:
@@ -52,22 +52,23 @@ class Parser(object):
         return ' '.join([sentence.strip() for sentence in sentences]).strip()
 
 
-@app.route('/helthcheck', methods=['GET'])
-def convert_raw_text():
+@app.route('/healthcheck', methods=['GET'], endpoint='healthcheck')
+def healthcheck():
     return jsonify("OK")
 
 
-@app.route('/summarize', methods=['POST'])
+@app.route('/summarize', methods=['POST'], endpoint='convert_raw_text')
 def convert_raw_text():
     ratio = float(request.args.get('ratio', 0.2))
     min_length = int(request.args.get('min_length', 25))
     max_length = int(request.args.get('max_length', 500))
 
-    data = request.data
-    if not data:
-        abort(make_response(jsonify(message="Request must have raw text"), 400))
+    summary = request.get_json()["summary"]
+    # data = request.data
+    # if not data:
+    #     abort(make_response(jsonify(message="Request must have raw text"), 400))
 
-    parsed = Parser(data).convert_to_paragraphs()
+    parsed = Parser(summary).convert_to_paragraphs()
     summary = summarizer(parsed, ratio=ratio, min_length=min_length, max_length=max_length)
 
     return jsonify({
