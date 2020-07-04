@@ -52,6 +52,11 @@ class Parser(object):
         return ' '.join([sentence.strip() for sentence in sentences]).strip()
 
 
+@app.route('/helthcheck', methods=['GET'])
+def convert_raw_text():
+    return jsonify("OK")
+
+
 @app.route('/summarize', methods=['POST'])
 def convert_raw_text():
     ratio = float(request.args.get('ratio', 0.2))
