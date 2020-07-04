@@ -59,14 +59,12 @@ def healthcheck():
 
 @app.route('/summarize', methods=['POST'], endpoint='convert_raw_text')
 def convert_raw_text():
-    ratio = float(request.args.get('ratio', 0.2))
     min_length = int(request.args.get('min_length', 25))
     max_length = int(request.args.get('max_length', 500))
 
-    summary = request.get_json()["summary"]
-    # data = request.data
-    # if not data:
-    #     abort(make_response(jsonify(message="Request must have raw text"), 400))
+    request_json = request.get_json()
+    summary = request_json["summary"]
+    ratio = request_json["ratio"]
 
     parsed = Parser(summary).convert_to_paragraphs()
     summary = summarizer(parsed, ratio=ratio, min_length=min_length, max_length=max_length)
