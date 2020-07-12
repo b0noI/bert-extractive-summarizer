@@ -65,6 +65,7 @@ def convert_raw_text():
     request_json = request.get_json()
     summary = request_json["summary"]
     ratio = request_json["ratio"]
+    print("ratio from the request: {}".format(ratio))
 
     parsed = Parser(summary).convert_to_paragraphs()
     summary = summarizer(parsed, ratio=ratio, min_length=min_length, max_length=max_length)
